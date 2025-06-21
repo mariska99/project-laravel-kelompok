@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\produk;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -93,8 +94,9 @@ class UserController extends Controller
     public function home()
     {
         $totalUser = User::count();
+        $totalProduk = produk::count();
 
-        return view('home', compact('totalUser'));
+        return view('home', compact('totalUser', 'totalProduk'));
     }
 
     /**

@@ -37,7 +37,7 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                     Total Wisata</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">Total Produk</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalProduk }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-box fa-2x text-gray-300"></i>
