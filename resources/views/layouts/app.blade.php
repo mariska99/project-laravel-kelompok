@@ -58,14 +58,16 @@
                 Interface
             </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item {{ request()->is('users*') ? 'active' : '' }}">
-                <a class="nav-link collapsed" href="/users" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Users</span>
-                </a>
-            </li>
+            @if (auth()->user()->role === 'admin')
+                <!-- Nav Item - Pages Collapse Menu -->
+                <li class="nav-item {{ request()->is('users*') ? 'active' : '' }}">
+                    <a class="nav-link collapsed" href="/users" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Users</span>
+                    </a>
+                </li>
+            @endif
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item {{ request()->is('produk*') ? 'active' : '' }}">
@@ -94,14 +96,15 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Nama</span>
+                                <span
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->name }}</span>
                                 <img class="img-profile rounded-circle" src={{ asset('img/profile.svg') }}>
                             </a>
 
                         </li>
                     </ul>
 
-                    <form method="POST" action="/logout">
+                    <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit" class="btn btn-danger btn-sm shadow-sm">
                             <i class="fas fa-sign-out-alt"></i> Logout
