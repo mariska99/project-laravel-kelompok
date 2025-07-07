@@ -19,6 +19,8 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TimePicker;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class WisataResource extends Resource
 {
@@ -27,6 +29,17 @@ class WisataResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-map';
 
     protected static ?string $navigationLabel = 'Wisata';
+
+    public static function canCreate(): bool
+    {
+        return Auth::user()?->hasRole('admin');
+    }
+
+    // Kalau pakai Bulk delete
+    public static function canDeleteAny(): bool
+    {
+        return Auth::user()?->hasRole('admin');
+    }
 
     public static function form(Form $form): Form
     {
@@ -60,9 +73,9 @@ class WisataResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ViewAction::make()->visible(fn() => Auth::user()?->hasRole('admin')),
+                Tables\Actions\EditAction::make()->visible(fn() => Auth::user()?->hasRole('admin')),
+                Tables\Actions\DeleteAction::make()->visible(fn() => Auth::user()?->hasRole('admin')),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -10,6 +10,11 @@ class EditWisata extends EditRecord
 {
     protected static string $resource = WisataResource::class;
 
+    public static function canAccess(array $parameters = []): bool
+    {
+        return auth()->user()?->hasRole('admin');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

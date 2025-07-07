@@ -10,6 +10,11 @@ class CreateWisata extends CreateRecord
 {
     protected static string $resource = WisataResource::class;
 
+    public static function canAccess(array $parameters = []): bool
+    {
+        return auth()->user()?->hasRole('admin');
+    }
+
     protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl('index');
