@@ -79,6 +79,7 @@ Buka kembali software **GIT** lalu jalankan perintah berikut:
 
 ```bash
 php artisan migrate
+php artisan db:seed --class=RoleSeeder
 ```
 
 ### 6. Link Storage (untuk menampilkan gambar)
